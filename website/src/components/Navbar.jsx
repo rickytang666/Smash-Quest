@@ -6,7 +6,10 @@ import logo from '../Assets/web_logo.png';
 const Navbar = ({ isLoggedIn, onLogout, userName }) => {
   return (
     <nav className="navbar">
-      <img src={logo} alt="Logo" className="navbar-logo" />
+      <div className="navbar-brand">
+        <img src={logo} alt="Logo" className="navbar-logo" />
+        <span className="company-name">Smash Quest</span>
+      </div>
       <ul className="navbar-links">
         <li><Link to="/about">About</Link></li>
         <li><Link to="/community">Community</Link></li>
