@@ -1,7 +1,7 @@
 .navbar {
   display: flex;
-  justify-content: space-between; /* Ensures items are distributed */
-  align-items: center;
+  justify-content: space-between;
+  align-items: center; /* Ensures vertical alignment */
   padding: 10px 20px;
   background-color: #333;
   height: 80px; /* Adjust the navbar height as needed */
@@ -26,6 +26,7 @@
 
 .navbar-links {
   display: flex;
+  align-items: center; /* Ensures vertical alignment */
   list-style: none;
   padding: 0;
   margin: 0;
