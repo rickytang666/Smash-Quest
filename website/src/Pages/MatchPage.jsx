@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './MatchPage.css';
 
-const MatchPage = () => {
+const MatchPage = ({ userName }) => {
   const [bestOf, setBestOf] = useState(1);
   const [firstTo, setFirstTo] = useState(11);
   const [player1, setPlayer1] = useState('');
@@ -14,6 +14,17 @@ const MatchPage = () => {
   const [gameResults, setGameResults] = useState([]);
   const [setupComplete, setSetupComplete] = useState(false);
   const [setPending, setSetPending] = useState(false);
+  const [pastMatches, setPastMatches] = useState([]);
+
+  useEffect(() => {
+    if (userName) {
+      const savedMatches = localStorage.getItem(userName + '_matches');
+      console.log('Loaded past matches:', savedMatches); // Debugging log
+      if (savedMatches) {
+        setPastMatches(JSON.parse(savedMatches));
+      }
+    }
+  }, [userName]);
 
   const handleSetupSubmit = (e) => {
     e.preventDefault();
@@ -22,25 +33,21 @@ const MatchPage = () => {
 
   const handlePointChange = (player, delta) => {
     if (results) return;
-
     if (setPending) {
       confirmSetWin();
       return;
     }
-
     if (player === 1) {
       setPoints1((prevPoints) => Math.max(0, prevPoints + delta));
     } else {
       setPoints2((prevPoints) => Math.max(0, prevPoints + delta));
     }
-
     checkSetWin(player);
   };
 
   const checkSetWin = (player) => {
     const points = player === 1 ? points1 + 1 : points2 + 1;
     const opponentPoints = player === 1 ? points2 : points1;
-
     if (points >= firstTo && points - opponentPoints >= 2) {
       setSetPending(true);
     }
@@ -52,12 +59,10 @@ const MatchPage = () => {
     } else if (points2 >= firstTo && points2 - points1 >= 2) {
       setSets2((prevSets) => prevSets + 1);
     }
-
     setGameResults((prevResults) => [
       ...prevResults,
       { player1: points1, player2: points2 }
     ]);
-
     setPoints1(0);
     setPoints2(0);
     setSetPending(false);
@@ -69,11 +74,28 @@ const MatchPage = () => {
 
   const checkMatchWin = () => {
     const setsNeededToWin = Math.ceil(bestOf / 2);
-
     if (sets1 >= setsNeededToWin) {
       setResults(`${player1} wins the match!`);
+      saveMatchResult();
     } else if (sets2 >= setsNeededToWin) {
       setResults(`${player2} wins the match!`);
+      saveMatchResult();
+    }
+  };
+
+  const saveMatchResult = () => {
+    if (userName) {
+      const matchData = {
+        player1,
+        player2,
+        sets1,
+        sets2,
+        date: new Date().toLocaleDateString()
+      };
+      const updatedMatches = [...pastMatches, matchData];
+      setPastMatches(updatedMatches);
+      localStorage.setItem(userName + '_matches', JSON.stringify(updatedMatches));
+      console.log('Saved past matches:', updatedMatches); // Debugging log
     }
   };
 
@@ -191,6 +213,18 @@ const MatchPage = () => {
             </label>
             <button type="submit">Set Up Match</button>
           </form>
+        </div>
+      )}
+      {userName && (
+        <div className="past-matches">
+          <h2>Past Matches</h2>
+          {pastMatches.map((match, index) => (
+            <div key={index}>
+              <h3>{match.player1} vs {match.player2}</h3>
+              <p>Score: {match.sets1} - {match.sets2}</p>
+              <p>Date: {match.date}</p>
+            </div>
+          ))}
         </div>
       )}
     </div>
