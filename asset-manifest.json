@@ -1,14 +1,17 @@
 {
   "files": {
-    "main.css": "/Smash-Quest/static/css/main.4a227dbc.css",
-    "main.js": "/Smash-Quest/static/js/main.88440c39.js",
+    "main.css": "/Smash-Quest/static/css/main.43730835.css",
+    "main.js": "/Smash-Quest/static/js/main.c562346f.js",
+    "static/media/blade.jpg": "/Smash-Quest/static/media/blade.65eb34dfc91b54e6d531.jpg",
     "static/media/web_logo.png": "/Smash-Quest/static/media/web_logo.c416fe1372aba4d61f0a.png",
+    "static/media/table.jpg": "/Smash-Quest/static/media/table.069701f77b7d43d2c454.jpg",
+    "static/media/watch.jpg": "/Smash-Quest/static/media/watch.611aabf61fcab50a6dd9.jpg",
     "index.html": "/Smash-Quest/index.html",
-    "main.4a227dbc.css.map": "/Smash-Quest/static/css/main.4a227dbc.css.map",
-    "main.88440c39.js.map": "/Smash-Quest/static/js/main.88440c39.js.map"
+    "main.43730835.css.map": "/Smash-Quest/static/css/main.43730835.css.map",
+    "main.c562346f.js.map": "/Smash-Quest/static/js/main.c562346f.js.map"
   },
   "entrypoints": [
-    "static/css/main.4a227dbc.css",
-    "static/js/main.88440c39.js"
+    "static/css/main.43730835.css",
+    "static/js/main.c562346f.js"
   ]
 }
