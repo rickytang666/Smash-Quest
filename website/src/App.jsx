@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import AboutPage from './Pages/AboutPage';
 import MyCenterPage from './Pages/MyCenterPage';
@@ -43,6 +43,7 @@ function App() {
     <div className="App">
       <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} userName={userName} />
       <Routes>
+        <Route path="/" element={<Navigate to="/about" replace />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/my-center" element={<MyCenterPage userName={userName} points={points} addPoint={addPoint} />} />
         <Route path="/community" element={<CommunityPage />} />
